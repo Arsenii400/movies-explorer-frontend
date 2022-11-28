@@ -1,0 +1,141 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 74px;
+  box-sizing: border-box;
+  padding: 0 70px;
+  width: 100%;
+}
+
+.header_color_white {
+  background-color: white;
+}
+
+.header_color_green {
+  background-color: #073042;
+}
+
+.header__link_type_logo {
+  border-radius: 50%;
+  flex-basis: 100px;
+}
+
+.header__logo {
+  display: block;
+}
+
+.header__wrapper {
+  display: flex;
+}
+
+.header__link_type_login {
+  display: flex;
+  width: 76px;
+  height: 32px;
+  background-color: #2BE080;
+  border-radius: 3px;
+  color: black;
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__text_type_login {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0;
+  text-decoration: none;
+}
+
+.header__link_type_register {
+  color: black;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.header__text_type_register {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0;
+  color: white;
+}
+
+.header__navigation {
+  display: flex;
+  justify-content: center;
+  column-gap: 16px;
+}
+
+.header__navLink {
+  font-size: 13px;
+  line-height: 18px;
+  color: black;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.header__navLink:hover {
+  opacity: 0.7;
+}
+
+.header__navigation_active {
+  font-weight: 500;
+}
+
+.header__account {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.header__account_type_text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  margin-right: 17px;
+  color: black;
+}
+
+.header__account_type_photo {
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  padding: 8px 7.25px;
+}
+
+@media screen and (max-width: 861px) {
+  .header {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header {
+    padding: 18px 14px;
+  }
+
+  .header__text_type_register {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .header__text_type_login {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .header__link_type_register {
+    margin-right: 14px;
+  }
+
+  .header__link_type_login {
+    width: 54px;
+    height: 26px;
+  }
+}
