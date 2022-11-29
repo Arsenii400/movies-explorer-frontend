@@ -58,7 +58,7 @@
   font-size: 14px;
   line-height: 17px;
   padding: 13px 0;
-  margin-top: 125px;
+  /* margin-top: 125px; */
   cursor: pointer;
 }
 
@@ -92,4 +92,40 @@
 
 .register__link:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 450px) {
+  .register__wrapper {
+    padding-top: 56px;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+
+  .register__hello {
+    padding-top: 46px;
+  }
+
+  .register__form {
+    max-width: 260px;
+  }
+
+  .register__linkWrap {
+    margin-bottom: 30px;
+  }
+
+  .register__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__button {
+    margin-top: 212px;
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

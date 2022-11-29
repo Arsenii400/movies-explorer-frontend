@@ -43,6 +43,14 @@
   width: 100%;
 }
 
+.login__input:invalid {
+  border: 1px solid red;
+}
+
+.login__input:valid {
+  border: 1px solid green;
+}
+
 .login__input-error {
   display: inline-block;
   min-height: 24px;
@@ -92,4 +100,40 @@
 
 .login__link:hover {
   opacity: 0.8;
+}
+
+@media screen and (max-width: 450px) {
+  .login__wrapper {
+    padding-top: 56px;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+
+  .login__hello {
+    padding-top: 46px;
+  }
+
+  .login__form {
+    max-width: 260px;
+  }
+
+  .login__linkWrap {
+    margin-bottom: 30px;
+  }
+
+  .login__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .login__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .login__button {
+    margin-top: 212px;
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

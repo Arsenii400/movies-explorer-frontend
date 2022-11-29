@@ -82,3 +82,18 @@
     margin-bottom: 269px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .profile__string {
+    max-width: 260px;
+  }
+
+  .profile__header {
+    margin-top: 70px;
+    margin-bottom: 64px;
+  }
+
+  .profile__exit {
+    margin-bottom: 40px;
+  }
+}

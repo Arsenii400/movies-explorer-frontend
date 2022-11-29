@@ -27,3 +27,23 @@
   text-decoration: none;
   margin-top: 184px;
 }
+
+@media screen and (max-width: 450px) {
+  .not-found__statusCode {
+    font-size: 80px;
+    line-height: 97px;
+    margin-top: 329px;
+  }
+
+  .not-found__title {
+    font-size: 12px;
+    line-height: 15px;
+    padding-top: 11px;
+  }
+
+  .not-found__return {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 284px;
+  }
+}

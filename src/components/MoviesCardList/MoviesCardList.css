@@ -50,3 +50,18 @@
     margin-bottom: 30px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .moviesCardList {
+    padding: 40px 10px 0;
+  }
+
+  .moviesList {
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+
+  .moviesCardList__more {
+    min-width: 240px;
+  }
+}

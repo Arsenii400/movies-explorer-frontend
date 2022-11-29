@@ -97,3 +97,15 @@
     padding: 0 0 14px 14px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .card__name {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .card__duration {
+    font-size: 10px;
+    line-height: 12px;
+  }
+}
