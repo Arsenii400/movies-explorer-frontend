@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 
 function Register() {
   return (
-    <section className="register">
+    <main className="register">
       <div className="register__wrapper">
         <Link exact to="/" title="Главная страница">
           <img className="register__logo" src={logo} alt="logo" />
@@ -28,7 +28,7 @@ function Register() {
         <p className="register__text">Уже зарегистрированы?</p>
         <Link to="/signin" className="register__link">Войти</Link>
       </div>
-    </section>
+    </main>
   )
 }
 

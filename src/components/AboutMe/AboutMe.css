@@ -9,6 +9,7 @@
     "link image";
   margin: 0;
   padding: 110px 70px 100px;
+  column-gap: 10px;
 }
 
 .aboutMe__title {
@@ -92,7 +93,7 @@
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 550px) {
   .aboutMe {
     grid-template-areas:
       "title title"
@@ -106,12 +107,9 @@
 
   .aboutMe__photo {
     justify-self: center;
-    max-height: 352px;
   }
 
   .aboutMe__title {
-    font-size: 18px;
-    line-height: 22px;
     padding-bottom: 28px;
     margin-bottom: 60px;
   }
@@ -119,6 +117,31 @@
   .aboutMe__name {
     padding-top: 40px;
     padding-bottom: 20px;
+  }
+
+  .aboutMe__job {
+    padding-bottom: 20px;
+  }
+
+  .aboutMe__story {
+    padding-bottom: 40px;
+    min-height: 112px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+
+
+  .aboutMe__photo {
+    max-height: 352px;
+  }
+
+  .aboutMe__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .aboutMe__name {
     font-size: 30px;
     line-height: 36px;
   }
@@ -126,13 +149,10 @@
   .aboutMe__job {
     font-size: 11px;
     line-height: 16px;
-    padding-bottom: 20px;
   }
 
   .aboutMe__story {
     font-size: 11px;
     line-height: 16px;
-    padding-bottom: 40px;
-    min-height: 112px;
   }
 }

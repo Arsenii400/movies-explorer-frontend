@@ -10,15 +10,17 @@ import Footer from '../Footer/Footer';
 
 function Main() {
   return (
-    <main className="main">
+    <>
       <Header />
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
+      <main className="main">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
 

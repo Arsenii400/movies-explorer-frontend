@@ -5,7 +5,7 @@ import logo from "../../images/logo.svg";
 
 function Login() {
   return (
-    <section className="login">
+    <main className="login">
       <div className="login__wrapper">
         <Link exact to="/" title="Главная страница">
           <img className="login__logo" src={logo} alt="logo" />
@@ -25,7 +25,7 @@ function Login() {
         <p className="login__text">Ещё не зарегистрированы?</p>
         <Link to="/signup" className="login__link">Регистрация</Link>
       </div>
-    </section>
+    </main>
   )
 }
 

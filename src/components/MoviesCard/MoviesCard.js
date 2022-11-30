@@ -1,8 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import './MoviesCard.css';
-// import like from '../../images/like.svg';
-// import likective from '../../images/like-active.svg';
 import deleted from '../../images/delete.svg';
 
 function MoviesCard(props) {
@@ -23,7 +21,6 @@ function MoviesCard(props) {
 
           {pathname === '/movies' && (
             <button className="card__like" onClick={likeActive} type="button">
-              {/* <img src={like} alt="лайк" /> */}
             </button>
           )}
 

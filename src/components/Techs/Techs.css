@@ -39,7 +39,8 @@
 .tech__technologies {
   display: flex;
   justify-content: center;
-  column-gap: 10px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .tech__technology {
