@@ -1,0 +1,158 @@
+.aboutMe {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "title title"
+    "name image"
+    "job image"
+    "story image"
+    "link image";
+  margin: 0;
+  padding: 110px 70px 100px;
+  column-gap: 10px;
+}
+
+.aboutMe__title {
+  grid-area: title;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  margin: 0 0 66px;
+  padding: 0 0 23px;
+  border-bottom: 1px solid black;
+}
+
+.aboutMe__name {
+  grid-area: name;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  margin: 0;
+  padding: 0;
+}
+
+.aboutMe__job {
+  grid-area: job;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.aboutMe__story {
+  grid-area: story;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+.aboutMe__link {
+  grid-area: link;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  color: black;
+  align-self: flex-end;
+}
+
+.aboutMe__photo {
+  grid-area: image;
+  border-radius: 10px;
+  max-height: 327px;
+  justify-self: flex-end;
+}
+
+@media screen and (max-width: 861px) {
+  .aboutMe {
+    padding: 90px 50px;
+  }
+
+  .aboutMe__name {
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .aboutMe__photo {
+    max-height: 307px;
+  }
+
+  .aboutMe__job {
+    font-size: 12px;
+    line-height: 18px
+  }
+
+  .aboutMe__story {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .aboutMe {
+    grid-template-areas:
+      "title title"
+      "image image"
+      "name name"
+      "job job"
+      "story story"
+      "link link";
+    padding: 70px 14px;
+  }
+
+  .aboutMe__photo {
+    justify-self: center;
+  }
+
+  .aboutMe__title {
+    padding-bottom: 28px;
+    margin-bottom: 60px;
+  }
+
+  .aboutMe__name {
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+
+  .aboutMe__job {
+    padding-bottom: 20px;
+  }
+
+  .aboutMe__story {
+    padding-bottom: 40px;
+    min-height: 112px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+
+
+  .aboutMe__photo {
+    max-height: 352px;
+  }
+
+  .aboutMe__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .aboutMe__name {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .aboutMe__job {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .aboutMe__story {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

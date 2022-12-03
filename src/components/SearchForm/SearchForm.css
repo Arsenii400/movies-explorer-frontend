@@ -1,0 +1,128 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 70px 0;
+  margin-bottom: 10px;
+}
+
+.search__bottomLine {
+  padding-bottom: 70px;
+  border-bottom: 1px solid #E8E8E8;
+  width: 100%;
+}
+
+.search__form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 46px;
+  background-color: #F9F9F9;
+  border-radius: 40px;
+  padding: 6px 6px 6px 22px;
+  box-sizing: border-box;
+  margin-bottom: 31px;
+}
+
+.search__input:focus {
+  outline: 1px solid black;
+}
+
+.search__input {
+  border: none;
+  background: none;
+  flex: 1;
+}
+
+.search__button {
+  width: 80px;
+  height: 34px;
+  border-radius: 48px;
+  border: none;
+  background-color: #3456F3;
+  background-image: url(../../images/lupa.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+.search__button:hover {
+  opacity: 0.8;
+}
+
+.toggle {
+  display: flex;
+  position: relative;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.toggle__invisible-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.toggle__track {
+  display: flex;
+  align-items: center;
+  width: 36px;
+  height: 20px;
+  border-radius: 16px;
+  padding: 2px;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06);
+}
+
+.toggle__indicator {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #F5F5F5;
+}
+
+.toggle__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  margin-left: 12px;
+}
+
+.toggle__invisible-input:checked+.toggle__track {
+  justify-content: flex-end;
+}
+
+.toggle__invisible-input:checked+.toggle__track>.toggle__indicator {
+  background-color: #2BE080;
+}
+
+@media screen and (max-width: 861px) {
+  .search {
+    padding: 80px 30px 0;
+  }
+
+  .search__bottomLine {
+    padding-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .search {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .search__input {
+    font-size: 11px;
+    line-height: 17px;
+  }
+
+  .toggle__text {
+    font-size: 11px;
+    line-height: 18px;
+  }
+}

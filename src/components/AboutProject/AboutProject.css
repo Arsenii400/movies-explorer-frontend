@@ -1,0 +1,168 @@
+.aboutProject {
+  padding: 110px 70px;
+  display: grid;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 40px;
+  grid-template-areas:
+    "title title"
+    "stages weeks"
+    "timeline timeline";
+}
+
+.aboutProject__title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  grid-area: title;
+  margin: 0;
+  padding-bottom: 23px;
+  border-bottom: 1px solid black;
+}
+
+.aboutProject__stages {
+  grid-area: stages;
+  padding-top: 70px;
+  padding-bottom: 110px;
+}
+
+.aboutProject__weeks {
+  grid-area: weeks;
+  padding-top: 70px;
+  padding-bottom: 110px;
+}
+
+.aboutProject__headers {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+  margin: 0;
+  padding: 0 0 26px;
+}
+
+.aboutProject__text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.aboutProject__timeline {
+  grid-area: timeline;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline__backend {
+  flex-basis: 0px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.timeline__frontend {
+  flex-basis: 0px;
+  flex-grow: 4;
+  text-align: center;
+
+}
+
+.timeline__time {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  padding: 9px 0;
+}
+
+.timeline__time_color_green {
+  background-color: #2BE080;
+}
+
+.timeline__time_color_grey {
+  background-color: #F2F2F2;
+}
+
+.timeline__title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #A0A0A0;
+  margin: 0;
+  padding: 14px 0 0;
+}
+
+@media screen and (max-width: 861px) {
+  .aboutProject {
+    padding: 90px 50px;
+    column-gap: 30px;
+  }
+
+  .aboutProject__headers {
+    padding-bottom: 22px;
+  }
+
+  .aboutProject__stages {
+    padding-bottom: 93px;
+  }
+
+  .aboutProject__weeks {
+    padding-bottom: 93px;
+  }
+
+  .aboutProject__text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .aboutProject {
+    padding: 70px 18px;
+    grid-template-areas:
+      "title title"
+      "stages stages"
+      "weeks weeks"
+      "timeline timeline";
+  }
+
+  .aboutProject__title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+
+  .aboutProject__stages {
+    padding: 60px 0 56px;
+  }
+
+  .aboutProject__weeks {
+    padding: 0 0 60px;
+  }
+
+  .aboutProject__headers {
+    padding-bottom: 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .aboutProject__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .timeline__time {
+    font-size: 11px;
+    line-height: 13px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+  .timeline__title {
+    font-size: 11px;
+    line-height: 13px;
+    padding-top: 10px;
+  }
+}

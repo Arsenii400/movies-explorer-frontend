@@ -1,0 +1,9 @@
+.page {
+  font-family: 'Inter', 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+  max-width: 1280px;
+}
