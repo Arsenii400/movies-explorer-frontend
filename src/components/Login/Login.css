@@ -43,14 +43,6 @@
   width: 100%;
 }
 
-/* .login__input:invalid {
-  border: 1px solid red;
-}
-
-.login__input:valid {
-  border: 1px solid green;
-} */
-
 .login__input-error {
   display: inline-block;
   min-height: 24px;
