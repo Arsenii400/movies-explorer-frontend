@@ -1,9 +1,31 @@
 import React from "react";
 import './Register.css';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import { useFormWithValidation } from "../../utils/Validate";
+import * as auth from '../../utils/Auth';
 
 function Register() {
+
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+  const history = useHistory();
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const { name, email, password } = values;
+    auth.register({ name, email, password }).then((res) => {
+      if(res){
+        history.push('/signin');
+        console.log(res.data);
+      } else {
+        console.log("Некорректно заполнено одно из полей");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <main className="register">
       <div className="register__wrapper">
@@ -12,17 +34,20 @@ function Register() {
         </Link>
         <p className="register__hello">Добро пожаловать!</p>
       </div>
-      <form className="register__form">
-        <label className="register__label" for="name">Имя</label>
-        <input className="register__input" id="name" type="text" minLength="2" maxLength="30" required />
-        <span className="register__input-error" />
-        <label className="register__label" for="email">E-mail</label>
-        <input className="register__input" id="email" type="email" required />
-        <span className="register__input-error" />
-        <label className="register__label" for="password">Пароль</label>
-        <input className="register__input" id="password" type="password" required />
-        <span className="register__input-error" />
-        <button className="register__button" type="submit">Зарегистрироваться</button>
+      <form className="register__form" onSubmit={handleSubmit} noValidate>
+        <label className="register__label" htmlFor="name">Имя</label>
+        <input className="register__input" id="name" name="name" type="text"
+        value={values.name} onChange={handleChange} minLength="2" maxLength="30" required />
+        <span className="register__input-error">{errors.name}</span>
+        <label className="register__label" htmlFor="email">E-mail</label>
+        <input className="register__input" id="email" name="email" type="email"
+        value={values.email} onChange={handleChange} required />
+        <span className="register__input-error">{errors.email}</span>
+        <label className="register__label" htmlFor="password">Пароль</label>
+        <input className="register__input" id="password" name="password" type="password"
+        value={values.password} onChange={handleChange} minLength="4" maxLength="15" required />
+        <span className="register__input-error">{errors.password}</span>
+        <button className="register__button" type="submit" disabled={!isValid} >Зарегистрироваться</button>
       </form>
       <div className="register__linkWrap">
         <p className="register__text">Уже зарегистрированы?</p>

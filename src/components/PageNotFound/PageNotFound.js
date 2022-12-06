@@ -1,15 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './PageNotFound.css';
 
-function PageNotFound () {
+function PageNotFound (props) {
+
+  const history = useHistory();
+
   return (
     <main className="not-found">
       <span className='not-found__statusCode'>404</span>
       <h3 className="not-found__title">
        Страница не найдена
       </h3>
-      <Link className="not-found__return" to="/">Назад</Link>
+      <button className="not-found__return"
+      onClick={ props.loggedIn ? () => history.goBack() : () => history.push("/signin") }>Назад</button>
     </main>
   )
 }

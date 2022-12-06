@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -8,31 +8,67 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import './App.css';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import * as auth from '../../utils/Auth';
 
 function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState({});
+  const history = useHistory();
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  }
+
+
+
+  useEffect(() => {
+    const tokenCheck = () => {
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+        auth.getContent(jwt).then((res) => {
+          if (res) {
+            setUserData({
+              name: res.data.name,
+              email: res.data.email
+            })
+            handleLogin();
+            history.push('/movies');
+          }
+        })
+      }
+    }
+    tokenCheck();
+  }, [history]);
+
   return (
     <div className='page'>
       <Switch>
         <Route exact path="/">
-          <Main />
+          <Main loggedIn={loggedIn} />
         </Route>
-        <Route path="/movies">
-          <Movies />
-        </Route>
-        <Route path="/saved-movies">
-          <SavedMovies />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
+        <ProtectedRoute path="/movies"
+          component={Movies}
+          loggedIn={loggedIn}
+        />
+        <ProtectedRoute path="/saved-movies"
+          component={SavedMovies}
+          loggedIn={loggedIn}
+        />
+        <ProtectedRoute path="/profile"
+          component={Profile}
+          loggedIn={loggedIn}
+          userData={userData}
+        />
         <Route path="/signin">
-          <Login />
+          <Login handleLogin={handleLogin} />
         </Route>
         <Route path="/signup">
           <Register />
         </Route>
         <Route path="*">
-          <PageNotFound />
+          <PageNotFound loggedIn={loggedIn} />
         </Route>
       </Switch>
     </div>

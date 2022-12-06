@@ -7,8 +7,8 @@ function MoviesCardList() {
   return (
     <section className="moviesCardList">
       <ul className="moviesList">
-        {initialCards.map((card) => (
-          <MoviesCard data={card} />
+        {initialCards.map((card, index) => (
+          <MoviesCard key={index} data={card} />
         ))}
       </ul>
       <div className="moviesCardList__wrapper">
