@@ -1,12 +1,20 @@
 import React from "react";
+import { useFormWithValidation } from "../../utils/Validate";
 import './SearchForm.css';
 
 function SearchForm() {
+
+  const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
+  const handleSubmit = () => {
+
+  }
+
   return (
     <section className="search">
-      <form className="search__form">
-        <input className="search__input" type="text" placeholder="Фильм" required />
-        <button className="search__button" />
+      <form className="search__form" onSubmit={handleSubmit} noValidate>
+        <input className="search__input" type="text" name="search" placeholder="Фильм"
+          value={values} onChange={handleChange} required />
+        <button className="search__button" type="submit" disabled={!isValid} />
       </form>
       <label className="toggle">
         <input className="toggle__invisible-input" type="checkbox" />

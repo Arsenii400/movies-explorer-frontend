@@ -8,9 +8,10 @@ import { LoggedInContext } from "../../utils/Context";
 function Header() {
   const { pathname } = useLocation();
   const loggedIn = useContext(LoggedInContext);
+  console.log(loggedIn);
   return (
     <>
-      {loggedIn &&
+      {(loggedIn === true) &&
         (
           <header
             className={`header ${(pathname === "/") ? "header_color_green" : "header_color_white"}`}>
@@ -85,7 +86,7 @@ function Header() {
         )
       }
 
-      {!loggedIn &&
+      {(loggedIn === false) &&
         (
           <header className="header header_color_green">
             <Link to="/" className="header__link header__link_type_logo" title="Главная страница">
