@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { LoggedInContext } from '../../utils/Context';
 import './PageNotFound.css';
 
-function PageNotFound (props) {
+function PageNotFound () {
 
   const history = useHistory();
+  const loggedIn = useContext(LoggedInContext);
 
   return (
     <main className="not-found">
@@ -13,7 +15,7 @@ function PageNotFound (props) {
        Страница не найдена
       </h3>
       <button className="not-found__return"
-      onClick={ props.loggedIn ? () => history.goBack() : () => history.push("/signin") }>Назад</button>
+      onClick={ loggedIn ? () => history.goBack() : () => history.push("/signin") }>Назад</button>
     </main>
   )
 }

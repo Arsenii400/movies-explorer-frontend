@@ -5,7 +5,7 @@ import logo from '../../images/logo.svg';
 import icon from '../../images/icon.svg';
 import { LoggedInContext } from "../../utils/Context";
 
-function Header(props) {
+function Header() {
   const { pathname } = useLocation();
   const loggedIn = useContext(LoggedInContext);
   return (

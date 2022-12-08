@@ -81,19 +81,16 @@ function App() {
         <div className='page'>
           <Switch>
             <Route exact path="/">
-              <Main loggedIn={loggedIn} />
+              <Main />
             </Route>
             <ProtectedRoute path="/movies"
               component={Movies}
-              loggedIn={loggedIn}
             />
             <ProtectedRoute path="/saved-movies"
               component={SavedMovies}
-              loggedIn={loggedIn}
             />
             <ProtectedRoute path="/profile"
               component={Profile}
-              loggedIn={loggedIn}
               signOut={signOut}
               handleCurrentUser={handleCurrentUser}
               handleOpenSuccessPopup={openSuccessPopup}
