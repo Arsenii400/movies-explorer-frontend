@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./Login.css";
 import logo from "../../images/logo.svg";
@@ -9,42 +9,54 @@ function Login(props) {
 
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
   const history = useHistory();
+  const [isServerError, setIsServerError] = useState("");
+
+  React.useEffect(() => {
+    resetForm({});
+  }, [resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const { email, password } = values;
-    auth.authorize({ email, password }).then((data) => {
-      if(data.token){
+    auth.authorize({ email, password }).then((res) => {
+      if (res.token) {
         props.handleLogin();
         history.push('/movies');
-        console.log(data);
       } else {
         console.log("Некорректно заполнено одно из полей");
+        setIsServerError(res.message);
       }
     })
-    .catch((err) => {
-      console.log(err);
-    })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
     <main className="login">
       <div className="login__wrapper">
-        <Link exact to="/" title="Главная страница">
+        <Link to="/" title="Главная страница">
           <img className="login__logo" src={logo} alt="logo" />
         </Link>
         <p className="login__hello">Рады видеть!</p>
       </div>
       <form className="login__form" onSubmit={handleSubmit} noValidate>
+
         <label className="login__label" htmlFor="email">E-mail</label>
         <input className="login__input" id="email" name="email" type="email"
-        value={values.email} onChange={handleChange} required />
+          value={values.email} onChange={handleChange} required />
         <span className="login__input-error">{errors.email}</span>
+
         <label className="login__label" htmlFor="password">Пароль</label>
-        <input className="login__input" id="password" name="password" type="password" minLength="2" maxLength="12"
-        value={values.password} onChange={handleChange} required />
+        <input className="login__input" id="password" name="password"
+          type="password" minLength="4" maxLength="15"
+          value={values.password} onChange={handleChange} required />
         <span className="login__input-error">{errors.password}</span>
-        <button className="login__button" type="submit" disabled={!isValid}>Войти</button>
+
+        <div className="login__buttonWrap">
+          <span className="login__input-error">{isServerError}</span>
+          <button className="login__button" type="submit" disabled={!isValid}>Войти</button>
+        </div>
       </form>
       <div className="login__linkWrap">
         <p className="login__text">Ещё не зарегистрированы?</p>

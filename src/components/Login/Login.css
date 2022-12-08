@@ -52,6 +52,12 @@
   color: #FF3055;
 }
 
+.login__buttonWrap {
+  margin-top: 167px;
+  text-align: center;
+  width: 100%;
+}
+
 .login__button {
   background: #3456F3;
   border: 0;
@@ -62,7 +68,6 @@
   font-size: 14px;
   line-height: 17px;
   padding: 13px 0;
-  margin-top: 195px;
   cursor: pointer;
 }
 
@@ -79,6 +84,7 @@
   display: flex;
   justify-content: center;
   margin-top: 16px;
+  margin-bottom: 70px;
 }
 
 .login__text {

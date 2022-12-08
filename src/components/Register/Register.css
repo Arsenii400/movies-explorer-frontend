@@ -52,6 +52,12 @@
   color: #FF3055;
 }
 
+.register__buttonWrap {
+  margin-top: 64px;
+  text-align: center;
+  width: 100%;
+}
+
 .register__button {
   background: #3456F3;
   border: 0;
@@ -63,7 +69,6 @@
   line-height: 17px;
   padding: 13px 0;
   cursor: pointer;
-  margin-top: 195px;
 }
 
 .register__button:disabled {
@@ -79,6 +84,7 @@
   display: flex;
   justify-content: center;
   margin-top: 16px;
+  margin-bottom: 70px;
 }
 
 .register__text {
