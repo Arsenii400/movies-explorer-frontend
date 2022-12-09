@@ -22,7 +22,7 @@
   border-radius: 40px;
   padding: 6px 6px 6px 22px;
   box-sizing: border-box;
-  margin-bottom: 31px;
+  margin-bottom: 7px;
 }
 
 .search__input:focus {
@@ -48,12 +48,22 @@
 }
 
 .search__button:disabled {
-  background: #F8F8F8;
-  color: #C2C2C2;
+  background-color: #C2C2C2;
+  color: #F8F8F8;
 }
 
 .search__button:hover {
   opacity: 0.8;
+}
+
+.search__input-error {
+  display: inline-block;
+  min-height: 24px;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: #FF3055;
+
 }
 
 .toggle {

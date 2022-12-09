@@ -14,10 +14,10 @@ function MoviesCard(props) {
     <section className="cardBox">
       <li className="card">
         <div className="card__imgWrap">
-          <img className="card__image" src={props.data.link} alt={props.data.name} />
+          <img className="card__image" src={`https://api.nomoreparties.co${props.card.image.url}`} alt={props.card.nameRU} />
         </div>
         <div className="card__hdgWrap">
-          <p className="card__name">{props.data.name}</p>
+          <p className="card__name">{props.card.nameRU}</p>
 
           {pathname === '/movies' && (
             <button className="card__like" onClick={likeActive} type="button">
@@ -31,7 +31,7 @@ function MoviesCard(props) {
           )}
 
         </div>
-        <p className="card__duration">{props.data.duration}</p>
+        <p className="card__duration">{props.card.duration}</p>
       </li>
     </section>
   )

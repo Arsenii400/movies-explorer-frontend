@@ -3,13 +3,13 @@ import { Link, useHistory } from "react-router-dom";
 import "./Login.css";
 import logo from "../../images/logo.svg";
 import { useFormWithValidation } from "../../utils/Validate";
-import * as auth from '../../utils/Auth';
+// import * as auth from '../../utils/Auth';
 
 function Login(props) {
 
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
-  const history = useHistory();
-  const [isServerError, setIsServerError] = useState("");
+  // const history = useHistory();
+  // const [isServerError, setIsServerError] = useState("");
 
   React.useEffect(() => {
     resetForm({});
@@ -18,18 +18,7 @@ function Login(props) {
   const handleSubmit = (e) => {
     e.preventDefault()
     const { email, password } = values;
-    auth.authorize({ email, password }).then((res) => {
-      if (res.token) {
-        props.handleLogin();
-        history.push('/movies');
-      } else {
-        console.log("Некорректно заполнено одно из полей");
-        setIsServerError(res.message);
-      }
-    })
-      .catch((err) => {
-        console.log(err);
-      })
+    props.handleLoginSubmit({ email, password });
   }
 
   return (
@@ -54,7 +43,7 @@ function Login(props) {
         <span className="login__input-error">{errors.password}</span>
 
         <div className="login__buttonWrap">
-          <span className="login__input-error">{isServerError}</span>
+          <span className="login__input-error">{props.isServerError}</span>
           <button className="login__button" type="submit" disabled={!isValid}>Войти</button>
         </div>
       </form>

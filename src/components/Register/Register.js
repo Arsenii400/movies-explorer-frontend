@@ -5,18 +5,24 @@ import logo from "../../images/logo.svg";
 import { useFormWithValidation } from "../../utils/Validate";
 import * as auth from '../../utils/Auth';
 
-function Register() {
+function Register(props) {
 
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
-  const history = useHistory();
+  // const history = useHistory();
   const [isServerError, setIsServerError] = useState("");
+
+  React.useEffect(() => {
+    resetForm({});
+  }, [resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault()
     const { name, email, password } = values;
     auth.register({ name, email, password }).then((res) => {
-      if(res.ok){
-        history.push('/signin');
+      console.log(res);
+      if(res){
+        props.handleLoginSubmit({ email, password });
+        // history.push('/signin');
         console.log(res.data);
       } else {
         setIsServerError(res.message);

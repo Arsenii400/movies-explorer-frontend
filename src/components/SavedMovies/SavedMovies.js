@@ -4,13 +4,13 @@ import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardLIst";
 import Footer from "../Footer/Footer";
 
-function SavedMovies() {
+function SavedMovies(props) {
   return (
     <>
       <Header />
       <main className="savedMovies">
         <SearchForm />
-        <MoviesCardList />
+        <MoviesCardList cards={props.savedCards} />
       </main>
       <Footer />
     </>

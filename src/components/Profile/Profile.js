@@ -44,8 +44,6 @@ function Profile(props) {
     })
   }
 
-  console.log(currentUser);
-
   return (
     <>
       <Header />

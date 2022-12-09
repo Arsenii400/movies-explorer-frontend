@@ -17,11 +17,12 @@ import denied from '../../images/denied.png';
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn'));
   const [currentUser, setCurrentUser] = useState({});
   const history = useHistory();
   const [isOpenSuccessPopup, setIsOpenSuccessPopup] = useState(false);
   const [isOpenDeniedPopup, setIsOpenDeniedPopup] = useState(false);
+  const [isServerError, setIsServerError] = useState("");
 
   const handleLogin = () => {
     setLoggedIn(true);
@@ -35,6 +36,14 @@ function App() {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
     history.push('/signin');
+  }
+
+  const [cards, setCards] = useState([]);
+  localStorage.setItem('cards', JSON.stringify(cards));
+
+  const handleCards = (data) => {
+    setCards(data);
+    localStorage.setItem('cards', JSON.stringify(cards));
   }
 
   const openSuccessPopup = () => {
@@ -62,7 +71,6 @@ function App() {
               id: res.data._id
             })
             setLoggedIn(true);
-            history.push('/movies');
           }
         })
           .catch((err) => {
@@ -73,7 +81,36 @@ function App() {
       }
     }
     tokenCheck();
-  }, [history]);
+  }, [loggedIn]);
+
+  const handleLoginSubmit = ({ email, password }) => {
+    auth.authorize({ email, password }).then((res) => {
+      if (res.token) {
+        const jwt = localStorage.getItem('jwt');
+        auth.getContent(jwt).then((res) => {
+          if (res) {
+            setCurrentUser({
+              name: res.data.name,
+              email: res.data.email,
+              id: res.data._id
+            })
+            setLoggedIn(true);
+            localStorage.setItem('loggedIn', loggedIn);
+            history.push('/movies');
+          } else {
+            console.log("Некорректно заполнено одно из полей");
+            setIsServerError(res.message);
+          }
+        })
+          .catch((err) => {
+            console.log(err);
+          })
+      }
+    })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   return (
     <LoggedInContext.Provider value={loggedIn}>
@@ -85,6 +122,8 @@ function App() {
             </Route>
             <ProtectedRoute path="/movies"
               component={Movies}
+              handleCards={handleCards}
+              cards={cards}
             />
             <ProtectedRoute path="/saved-movies"
               component={SavedMovies}
@@ -97,10 +136,10 @@ function App() {
               handleOpenDeniedPopup={openDeniedPopup}
             />
             <Route path="/signin">
-              <Login handleLogin={handleLogin} />
+              <Login handleLoginSubmit={handleLoginSubmit} isServerError={isServerError} />
             </Route>
             <Route path="/signup">
-              <Register />
+              <Register handleLoginSubmit={handleLoginSubmit} />
             </Route>
             <Route path="*">
               <PageNotFound loggedIn={loggedIn} />

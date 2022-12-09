@@ -7,11 +7,10 @@ import { LoggedInContext } from "../../utils/Context";
 const ProtectedRoute = ({ component: Component, ...props }) => {
 
   const loggedIn = useContext(LoggedInContext);
-
   return (
     <Route>
       {() =>
-        loggedIn ? <Component {...props} /> : <Redirect to="./" />
+        loggedIn ? <Component {...props} /> : <Redirect to="/" />
       }
     </Route>
   );

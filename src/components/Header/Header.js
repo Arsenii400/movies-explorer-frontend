@@ -8,7 +8,6 @@ import { LoggedInContext } from "../../utils/Context";
 function Header() {
   const { pathname } = useLocation();
   const loggedIn = useContext(LoggedInContext);
-  console.log(loggedIn);
   return (
     <>
       {(loggedIn === true) &&
