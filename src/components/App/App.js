@@ -38,13 +38,52 @@ function App() {
     history.push('/signin');
   }
 
-  const [cards, setCards] = useState([]);
-  localStorage.setItem('cards', JSON.stringify(cards));
+  const [originalCards, setOriginalCards] = useState([]);
+  localStorage.setItem('originalCards', JSON.stringify(originalCards));
 
-  const handleCards = (data) => {
-    setCards(data);
-    localStorage.setItem('cards', JSON.stringify(cards));
+  const handleOriginalCards = (data) => {
+    setOriginalCards(data);
+    localStorage.setItem('originalCards', JSON.stringify(originalCards));
   }
+
+  const [searchQuery, setSearchQuery] = useState(localStorage.getItem('searchQuery') || "");
+  localStorage.setItem('searchQuery', searchQuery);
+
+  const handleSearchQuery = (data) => {
+    setSearchQuery(data);
+    localStorage.setItem('searchQuery', searchQuery);
+  }
+
+  const [isShorts, setIsShorts] = useState(JSON.parse(localStorage.getItem('isShorts')));
+  localStorage.setItem('isShorts', isShorts);
+
+
+  const handleIsShorts = (e) => {
+    setIsShorts(e.target.checked);
+    localStorage.setItem('isShorts', e.target.checked);
+  }
+
+  const [processedCards, setProcessedCards] = useState(
+    JSON.parse(localStorage.getItem('processedCards')) || []);
+  localStorage.setItem('processedCards', JSON.stringify(processedCards));
+
+  const handleProcessedCards = (data, keyword) => {
+    localStorage.setItem('processedCards',
+      JSON.stringify(data.filter((card) => {
+        return card.nameRU.toLowerCase().includes(keyword.trim().toLowerCase());
+      })));
+    setProcessedCards(JSON.parse(localStorage.getItem('processedCards')));
+  }
+
+  const [isLiked, setIsLiked] = useState(JSON.parse(localStorage.getItem('isLiked')));
+  localStorage.set('isLiked', isLiked);
+
+  const handleIsLiked = (data) => {
+    setIsLiked(data);
+    localStorage.setItem('isLiked', data);
+  }
+
+  const [savedCards, setSavedCards] = useState(JSON.parse(localStorage.getItem('savedCards')) || []);
 
   const openSuccessPopup = () => {
     setIsOpenSuccessPopup(true);
@@ -112,6 +151,8 @@ function App() {
       })
   }
 
+
+
   return (
     <LoggedInContext.Provider value={loggedIn}>
       <CurrentUserContext.Provider value={currentUser}>
@@ -122,11 +163,17 @@ function App() {
             </Route>
             <ProtectedRoute path="/movies"
               component={Movies}
-              handleCards={handleCards}
-              cards={cards}
+              handleOriginalCards={handleOriginalCards}
+              handleSearchQuery={handleSearchQuery}
+              handleProcessedCards={handleProcessedCards}
+              processedCards={processedCards}
+              searchQuery={searchQuery}
+              handleIsShorts={handleIsShorts}
+              isShorts={isShorts}
             />
             <ProtectedRoute path="/saved-movies"
               component={SavedMovies}
+              savedCards={savedCards}
             />
             <ProtectedRoute path="/profile"
               component={Profile}

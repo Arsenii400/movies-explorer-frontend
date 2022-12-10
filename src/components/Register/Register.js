@@ -19,11 +19,9 @@ function Register(props) {
     e.preventDefault()
     const { name, email, password } = values;
     auth.register({ name, email, password }).then((res) => {
-      console.log(res);
       if(res){
         props.handleLoginSubmit({ email, password });
-        // history.push('/signin');
-        console.log(res.data);
+        // history.push('/signin');;
       } else {
         setIsServerError(res.message);
       }

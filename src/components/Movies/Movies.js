@@ -9,8 +9,15 @@ function Movies(props) {
     <>
       <Header />
       <main className="movies">
-        <SearchForm handleCards={props.handleCards} />
-        <MoviesCardList cards={props.cards} />
+        <SearchForm
+          handleOriginalCards={props.handleOriginalCards}
+          handleSearchQuery={props.handleSearchQuery}
+          handleProcessedCards={props.handleProcessedCards}
+          searchQuery={props.searchQuery}
+          handleIsShorts={props.handleIsShorts}
+          isShorts={props.isShorts}
+        />
+        <MoviesCardList cards={props.processedCards} isShorts={props.isShorts} />
       </main>
       <Footer />
     </>
