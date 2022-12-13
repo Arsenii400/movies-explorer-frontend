@@ -1,4 +1,4 @@
-export const BASE_URL = 'api.arsenii400.movies.nomoredomains.icu';
+export const BASE_URL = 'https:api.arsenii400.movies.nomoredomains.icu';
 export const BITFILMS_URL = 'https://api.nomoreparties.co';
 export const MY_GITHUB_URL = 'https://github.com/Arsenii400';
 export const YA_PRAKTIKUM_URL = 'https://practicum.yandex.ru/web/';
