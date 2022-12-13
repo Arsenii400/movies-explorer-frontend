@@ -7,3 +7,5 @@
 Ссылка на backend: https://github.com/Arsenii400/movies-explorer-api
 
 Ссылка на рull request: https://github.com/Arsenii400/movies-explorer-frontend/pull/2
+
+Ссылка на сайт: https://arsenii400.movies.nomoredomains.club
