@@ -65,8 +65,6 @@ function MoviesCardList(props) {
     }
   }
 
-  console.log(films.length);
-
   return (
     <section className="moviesCardList">
       {pathname === '/movies' && (
@@ -99,7 +97,7 @@ function MoviesCardList(props) {
         </ul>
       )}
 
-      <p className="moviesCardList__nothing" hidden={films.length = 0}>«Ничего не найдено»</p>
+      { props.isSearched && <p className="moviesCardList__nothing" hidden={films.length > 0}>«Ничего не найдено»</p> }
 
       <div className="moviesCardList__wrapper">
         <button className="moviesCardList__more" type="button" onClick={ShowMore}

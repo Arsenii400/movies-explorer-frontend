@@ -52,6 +52,8 @@ function App() {
     localStorage.setItem('originalCards', JSON.stringify(originalCards));
   }
 
+  const [isSearched, setIsSearched] = useState(false);
+
   const [searchQuery, setSearchQuery] = useState(localStorage.getItem('searchQuery') || "");
   localStorage.setItem('searchQuery', searchQuery);
 
@@ -200,6 +202,8 @@ function App() {
               setSavedCards={setSavedCards}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
+              isSearched={isSearched}
+              setIsSearched={setIsSearched}
             />
             <ProtectedRoute path="/saved-movies"
               component={SavedMovies}
@@ -209,6 +213,7 @@ function App() {
               handleIsSavedShorts={handleIsSavedShorts}
               handleSavedSearchQuery={handleSavedSearchQuery}
               savedSearchQuery={savedSearchQuery}
+              isSearched={isSearched}
             />
             <ProtectedRoute path="/profile"
               component={Profile}

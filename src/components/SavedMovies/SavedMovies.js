@@ -22,6 +22,7 @@ function SavedMovies(props) {
           isShorts={props.isSavedShorts}
           setShortSavedCards={props.setShortSavedCards}
           savedSearchQuery={props.savedSearchQuery}
+          isSearched={props.isSearched}
         />
       </main>
       <Footer />

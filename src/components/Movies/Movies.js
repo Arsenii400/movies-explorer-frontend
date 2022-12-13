@@ -18,6 +18,7 @@ function Movies(props) {
           handleIsShorts={props.handleIsShorts}
           isShorts={props.isShorts}
           setIsLoading={props.setIsLoading}
+          setIsSearched={props.setIsSearched}
         />
         { props.isLoading ? <Preloader /> :
         <MoviesCardList
@@ -26,6 +27,7 @@ function Movies(props) {
           savedCards={props.savedCards}
           handleSavedCards={props.handleSavedCards}
           setSavedCards={props.setSavedCards}
+          isSearched={props.isSearched}
         />}
       </main>
       <Footer />
