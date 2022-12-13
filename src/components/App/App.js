@@ -103,7 +103,6 @@ function App() {
   const findMyCards = () => {
     mainApi.getMyMovies()
       .then((res) => {
-        console.log(res.data)
         setSavedCards(res.data);
       })
       .catch((err) => {
