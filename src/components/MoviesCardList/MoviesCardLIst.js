@@ -99,7 +99,7 @@ function MoviesCardList(props) {
         </ul>
       )}
 
-      <p className="moviesCardList__nothing" hidden={films.length >= 0}>«Ничего не найдено»</p>
+      <p className="moviesCardList__nothing" hidden={films.length = 0}>«Ничего не найдено»</p>
 
       <div className="moviesCardList__wrapper">
         <button className="moviesCardList__more" type="button" onClick={ShowMore}
