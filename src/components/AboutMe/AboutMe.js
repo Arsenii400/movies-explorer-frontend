@@ -1,6 +1,7 @@
 import React from "react";
 import './AboutMe.css';
 import user from '../../images/student.jpg'
+import { MY_GITHUB_URL } from '../../utils/constants';
 
 function AboutMe() {
   return (
@@ -12,7 +13,7 @@ function AboutMe() {
         Люблю кататься на коньках и велосипеде. Недавно начал кодить. До этого ходил в море.
         После того как прошёл курс по веб-разработке, начал искать работу в разработке веб-приложений.
       </p>
-      <a className="aboutMe__link" href="https://github.com/Arsenii400">Github</a>
+      <a className="aboutMe__link" href={MY_GITHUB_URL}>Github</a>
       <img className="aboutMe__photo" src={user} alt="student" />
     </section>
   );

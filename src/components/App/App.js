@@ -10,6 +10,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import './App.css';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import * as auth from '../../utils/Auth';
+import * as mainApi from '../../utils/MainApi';
 import { CurrentUserContext, LoggedInContext } from '../../utils/Context';
 import InfoToolTip from '../InfoToolTip/InfoToolTip';
 import approve from '../../images/approve.png';
@@ -23,10 +24,7 @@ function App() {
   const [isOpenSuccessPopup, setIsOpenSuccessPopup] = useState(false);
   const [isOpenDeniedPopup, setIsOpenDeniedPopup] = useState(false);
   const [isServerError, setIsServerError] = useState("");
-
-  const handleLogin = () => {
-    setLoggedIn(true);
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCurrentUser = (data) => {
     setCurrentUser(data);
@@ -34,7 +32,15 @@ function App() {
 
   const signOut = () => {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('originalCards');
+    localStorage.removeItem('searchQuery');
+    localStorage.removeItem('isShorts');
+    localStorage.removeItem('processedCards');
+    localStorage.removeItem('savedCards');
     setLoggedIn(false);
+    setSearchQuery("");
+    setProcessedCards([]);
+    setIsShorts(false);
     history.push('/signin');
   }
 
@@ -63,6 +69,12 @@ function App() {
     localStorage.setItem('isShorts', e.target.checked);
   }
 
+  const [isSavedShorts, setIsSavedShorts] = useState(false);
+
+  const handleIsSavedShorts = (e) => {
+    setIsSavedShorts(e.target.checked)
+  }
+
   const [processedCards, setProcessedCards] = useState(
     JSON.parse(localStorage.getItem('processedCards')) || []);
   localStorage.setItem('processedCards', JSON.stringify(processedCards));
@@ -75,15 +87,29 @@ function App() {
     setProcessedCards(JSON.parse(localStorage.getItem('processedCards')));
   }
 
-  const [isLiked, setIsLiked] = useState(JSON.parse(localStorage.getItem('isLiked')));
-  localStorage.set('isLiked', isLiked);
+  const [savedCards, setSavedCards] = useState(JSON.parse(localStorage.getItem('savedCards')) || []);
 
-  const handleIsLiked = (data) => {
-    setIsLiked(data);
-    localStorage.setItem('isLiked', data);
+  const handleSavedCards = (item) => {
+    setSavedCards([...savedCards, item])
+    localStorage.setItem('savedCards', JSON.stringify([...savedCards, item]));
   }
 
-  const [savedCards, setSavedCards] = useState(JSON.parse(localStorage.getItem('savedCards')) || []);
+  const [savedSearchQuery, setSavedSearchQuery] = useState("");
+
+  const handleSavedSearchQuery = (value) => {
+    setSavedSearchQuery(value);
+  }
+
+  const findMyCards = () => {
+    mainApi.getMyMovies()
+      .then((res) => {
+        console.log(res.data)
+        setSavedCards(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   const openSuccessPopup = () => {
     setIsOpenSuccessPopup(true);
@@ -110,12 +136,14 @@ function App() {
               id: res.data._id
             })
             setLoggedIn(true);
+            findMyCards();
           }
         })
           .catch((err) => {
             console.log(err);
           })
       } else {
+        signOut();
         console.log("Нет токена в локальном хранилище");
       }
     }
@@ -151,8 +179,6 @@ function App() {
       })
   }
 
-
-
   return (
     <LoggedInContext.Provider value={loggedIn}>
       <CurrentUserContext.Provider value={currentUser}>
@@ -170,10 +196,20 @@ function App() {
               searchQuery={searchQuery}
               handleIsShorts={handleIsShorts}
               isShorts={isShorts}
+              savedCards={savedCards}
+              handleSavedCards={handleSavedCards}
+              setSavedCards={setSavedCards}
+              isLoading={isLoading}
+              setIsLoading={setIsLoading}
             />
             <ProtectedRoute path="/saved-movies"
               component={SavedMovies}
               savedCards={savedCards}
+              setSavedCards={setSavedCards}
+              isSavedShorts={isSavedShorts}
+              handleIsSavedShorts={handleIsSavedShorts}
+              handleSavedSearchQuery={handleSavedSearchQuery}
+              savedSearchQuery={savedSearchQuery}
             />
             <ProtectedRoute path="/profile"
               component={Profile}

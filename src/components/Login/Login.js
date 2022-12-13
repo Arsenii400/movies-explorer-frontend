@@ -1,15 +1,12 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import "./Login.css";
 import logo from "../../images/logo.svg";
 import { useFormWithValidation } from "../../utils/Validate";
-// import * as auth from '../../utils/Auth';
 
 function Login(props) {
 
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
-  // const history = useHistory();
-  // const [isServerError, setIsServerError] = useState("");
 
   React.useEffect(() => {
     resetForm({});

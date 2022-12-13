@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardLIst";
 import Footer from "../Footer/Footer";
+import Preloader from "../Preloader/Preloader";
 
 function Movies(props) {
   return (
@@ -16,8 +17,16 @@ function Movies(props) {
           searchQuery={props.searchQuery}
           handleIsShorts={props.handleIsShorts}
           isShorts={props.isShorts}
+          setIsLoading={props.setIsLoading}
         />
-        <MoviesCardList cards={props.processedCards} isShorts={props.isShorts} />
+        { props.isLoading ? <Preloader /> :
+        <MoviesCardList
+          cards={props.processedCards}
+          isShorts={props.isShorts}
+          savedCards={props.savedCards}
+          handleSavedCards={props.handleSavedCards}
+          setSavedCards={props.setSavedCards}
+        />}
       </main>
       <Footer />
     </>

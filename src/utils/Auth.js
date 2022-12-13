@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.arsenii400.movies.nomoredomains.icu';
+import { BASE_URL } from "./constants";
 
 export const register = ({ name, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Register.css';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { useFormWithValidation } from "../../utils/Validate";
 import * as auth from '../../utils/Auth';
@@ -8,7 +8,6 @@ import * as auth from '../../utils/Auth';
 function Register(props) {
 
   const { values, handleChange, resetForm, errors, isValid } = useFormWithValidation();
-  // const history = useHistory();
   const [isServerError, setIsServerError] = useState("");
 
   React.useEffect(() => {
@@ -21,7 +20,6 @@ function Register(props) {
     auth.register({ name, email, password }).then((res) => {
       if(res){
         props.handleLoginSubmit({ email, password });
-        // history.push('/signin');;
       } else {
         setIsServerError(res.message);
       }

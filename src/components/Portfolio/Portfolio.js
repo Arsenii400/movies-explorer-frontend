@@ -1,6 +1,7 @@
 import React from "react";
 import './Portfolio.css';
 import arrow from '../../images/arrow.svg';
+import { HOW_TO_LEARN_URL, RUSSIAN_TRAVEL_URL, MESTO_URL } from '../../utils/constants';
 
 function Portfolio() {
   return (
@@ -8,17 +9,17 @@ function Portfolio() {
       <h2 className="portfolio__title">Портфолио</h2>
       <ul className="portfolio__list">
         <li className="portfolio__item">
-          <a className="portfolio__link" href="https://github.com/Arsenii400/how-to-learn">Статичный сайт
+          <a className="portfolio__link" href={HOW_TO_LEARN_URL}>Статичный сайт
             <img className="portfolio__arrow" src={arrow} alt="arrow" />
           </a>
         </li>
         <li className="portfolio__item">
-          <a className="portfolio__link" href="https://github.com/Arsenii400/russian-travel">Адаптивный сайт
+          <a className="portfolio__link" href={RUSSIAN_TRAVEL_URL}>Адаптивный сайт
             <img className="portfolio__arrow" src={arrow} alt="arrow" />
           </a>
         </li>
         <li className="portfolio__item">
-          <a className="portfolio__link" href="https://github.com/Arsenii400/react-mesto-api-full">Одностраничное приложение
+          <a className="portfolio__link" href={MESTO_URL}>Одностраничное приложение
             <img className="portfolio__arrow" src={arrow} alt="arrow" />
           </a>
         </li>

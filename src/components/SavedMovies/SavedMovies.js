@@ -9,8 +9,20 @@ function SavedMovies(props) {
     <>
       <Header />
       <main className="savedMovies">
-        <SearchForm />
-        <MoviesCardList cards={props.savedCards} />
+        <SearchForm
+          cards={props.savedCards}
+          isSavedShorts={props.isSavedShorts}
+          handleIsSavedShorts={props.handleIsSavedShorts}
+          handleSavedSearchQuery={props.handleSavedSearchQuery}
+        />
+        <MoviesCardList
+          cards={props.savedCards}
+          savedCards={props.savedCards}
+          setSavedCards={props.setSavedCards}
+          isShorts={props.isSavedShorts}
+          setShortSavedCards={props.setShortSavedCards}
+          savedSearchQuery={props.savedSearchQuery}
+        />
       </main>
       <Footer />
     </>
