@@ -18,7 +18,7 @@ function Register(props) {
     e.preventDefault()
     const { name, email, password } = values;
     auth.register({ name, email, password }).then((res) => {
-      if(res){
+      if(res.data){
         props.handleLoginSubmit({ email, password });
       } else {
         setIsServerError(res.message);
@@ -40,13 +40,13 @@ function Register(props) {
       <form className="register__form" onSubmit={handleSubmit} noValidate>
 
         <label className="register__label" htmlFor="name">Имя</label>
-        <input className="register__input" id="name" name="name" type="text"
+        <input className="register__input" id="name" name="name" type="text" placeholder="Иван"
         value={values.name} onChange={handleChange} minLength="2" maxLength="30" required />
         <span className="register__input-error">{errors.name}</span>
 
         <label className="register__label" htmlFor="email">E-mail</label>
-        <input className="register__input" id="email" name="email" type="email"
-        value={values.email} onChange={handleChange} required />
+        <input className="register__input" id="email" name="email" type="email" placeholder="example@mail.com"
+        value={values.email} onChange={handleChange} pattern="^\S+@\S+\.\S+$" required />
         <span className="register__input-error">{errors.email}</span>
 
         <label className="register__label" htmlFor="password">Пароль</label>

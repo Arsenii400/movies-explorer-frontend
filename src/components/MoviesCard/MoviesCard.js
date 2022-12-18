@@ -3,14 +3,15 @@ import { useLocation } from "react-router-dom";
 import './MoviesCard.css';
 import deleted from '../../images/delete.svg';
 import * as mainApi from '../../utils/MainApi';
+import { HOUR } from "../../utils/constants";
 
 function MoviesCard(props) {
   const { pathname } = useLocation();
 
   function time(mins) {
-    let hours = Math.trunc(mins / 60);
-    let minutes = mins % 60;
-    if (mins >= 60) {
+    let hours = Math.trunc(mins / HOUR);
+    let minutes = mins % HOUR;
+    if (mins >= HOUR) {
       return hours + 'ч ' + minutes + 'м';
     } else {
       return minutes + 'м';
@@ -58,9 +59,7 @@ function MoviesCard(props) {
     <section className="cardBox">
       <li className="card">
         <div className="card__imgWrap">
-          <a className="card__link" href={pathname === '/movies' ?
-                `https://api.nomoreparties.co${props.card.trailerLink}` :
-                props.card.trailerLink}>
+          <a className="card__link" href={props.card.trailerLink} target="_blank" rel="noopener noreferrer">
             <img className="card__image"
               src={pathname === '/movies' ?
                 `https://api.nomoreparties.co${props.card.image.url}` :

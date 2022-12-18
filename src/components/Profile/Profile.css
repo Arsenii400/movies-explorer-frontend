@@ -60,15 +60,22 @@
   text-align: center;
 }
 
+.profile__buttonWrap {
+  margin-top: 185px;
+  margin-bottom: 16px;
+  text-align: center;
+  width: 100%;
+}
+
 .profile__edit {
   border: 0;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
   background-color: transparent;
-  margin: 185px 0 16px;
   cursor: pointer;
   padding: 0;
+  width: 100%;
 }
 
 .profile__edit:hover {
@@ -100,7 +107,7 @@
     margin-bottom: 269px;
   }
 
-  .profile__edit {
+  .profile__buttonWrap {
     margin: 167px 0 16px;
   }
 }
@@ -115,10 +122,13 @@
     margin-bottom: 64px;
   }
 
+  .profile__buttonWrap {
+    margin: 327px 0 16px;
+  }
+
   .profile__edit {
     font-size: 12px;
     line-height: 15px;
-    margin: 327px 0 16px;
   }
 
   .profile__exit {

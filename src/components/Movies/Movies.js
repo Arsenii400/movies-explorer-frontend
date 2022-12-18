@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
-import MoviesCardList from "../MoviesCardList/MoviesCardLIst";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Footer from "../Footer/Footer";
 import Preloader from "../Preloader/Preloader";
 
@@ -11,6 +11,7 @@ function Movies(props) {
       <Header />
       <main className="movies">
         <SearchForm
+          originalCards={props.originalCards}
           handleOriginalCards={props.handleOriginalCards}
           handleSearchQuery={props.handleSearchQuery}
           handleProcessedCards={props.handleProcessedCards}
@@ -18,6 +19,7 @@ function Movies(props) {
           handleIsShorts={props.handleIsShorts}
           isShorts={props.isShorts}
           setIsLoading={props.setIsLoading}
+          isSearched={props.isSearched}
           setIsSearched={props.setIsSearched}
         />
         { props.isLoading ? <Preloader /> :

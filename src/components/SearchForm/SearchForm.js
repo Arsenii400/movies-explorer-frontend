@@ -14,27 +14,36 @@ function SearchForm(props) {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    if (isValid) {
-      props.setIsLoading(true);
-      moviesApi.getFilms()
-        .then((res) => {
-          props.handleOriginalCards(res);
-          props.handleSearchQuery(values.search);
-          props.handleProcessedCards(res, values.search);
-          props.setIsSearched(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          props.setIsLoading(false);
-        })
+    console.log(props.isSearched)
+    if (props.isSearched) {
+      if (isValid) {
+        props.handleSearchQuery(values.search);
+        props.handleProcessedCards(props.originalCards, values.search);
+      }
+    } else {
+      if (isValid) {
+        props.setIsLoading(true);
+        moviesApi.getFilms()
+          .then((res) => {
+            props.handleOriginalCards(res);
+            props.handleSearchQuery(values.search);
+            props.handleProcessedCards(res, values.search);
+            props.setIsSearched(true);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+          .finally(() => {
+            props.setIsLoading(false);
+          })
+      }
     }
   }
 
   const handleSavedSearchSubmit = (e) => {
     e.preventDefault()
     props.handleSavedSearchQuery(values.search)
+    props.setIsSavedSearched(true);
   }
 
   return (

@@ -6,3 +6,17 @@ export const GITHUB_URL = 'https://github.com/';
 export const HOW_TO_LEARN_URL = 'https://github.com/Arsenii400/how-to-learn';
 export const RUSSIAN_TRAVEL_URL = 'https://github.com/Arsenii400/russian-travel';
 export const MESTO_URL = 'https://github.com/Arsenii400/react-mesto-api-full';
+
+export const HOUR = 60;
+export const DURATION = 40;
+
+export const BIGWINSIZE = 1087;
+export const MEDIUMWINSIZE = 689;
+
+export const BIGCOUNT = 12;
+export const MEDIUMCOUNT = 8;
+export const SMALLCOUNT = 5;
+
+export const BIGMORE = 3;
+export const SMALLMORE = 2;
+

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import { DURATION, BIGWINSIZE, MEDIUMWINSIZE,
+BIGCOUNT, MEDIUMCOUNT, SMALLCOUNT, BIGMORE, SMALLMORE } from "../../utils/constants";
 
 function MoviesCardList(props) {
   const { pathname } = useLocation();
@@ -10,32 +12,37 @@ function MoviesCardList(props) {
 
   useEffect(() => {
     if (props.isShorts) {
-      setFilms(props.cards.filter((card) => {
-        return card.duration < 40
-      })
-      )
+      if (props.isSavedSearched) {
+        setFilms(props.cards.filter((card) => {
+          return card.duration < DURATION && card.nameRU.toLowerCase().includes(props.savedSearchQuery.trim().toLowerCase());
+        }))
+        props.setIsSavedSearched(false);
+      } else {
+        setFilms(props.cards.filter((card) => {
+          return card.duration < DURATION
+        })
+        )
+      }
     } else {
-      return setFilms(props.cards);
+      if (props.isSavedSearched) {
+        setFilms(props.cards.filter((card) => {
+          return card.nameRU.toLowerCase().includes(props.savedSearchQuery.trim().toLowerCase());
+        }))
+        props.setIsSavedSearched(false);
+      } else {
+        return setFilms(props.cards);
+      }
     }
-  }, [props.isShorts, props.cards])
 
-  useEffect(() => {
-    if (props.savedSearchQuery) {
-      setFilms(props.cards.filter((card) => {
-        return card.nameRU.toLowerCase().includes(props.savedSearchQuery.trim().toLowerCase());
-      }))
-    } else {
-      return setFilms(props.cards);
-    }
-  }, [props.savedSearchQuery, props.cards])
+  }, [props.savedSearchQuery, props.isShorts, props.cards])
 
   const reportInitialWindowSize = () => {
-    if (window.screen.width > 1087) {
-      return { count: 12, more: 3 };
-    } else if (window.screen.width > 689) {
-      return { count: 8, more: 2 };
+    if (window.screen.width > BIGWINSIZE) {
+      return { count: BIGCOUNT, more: BIGMORE };
+    } else if (window.screen.width > MEDIUMWINSIZE) {
+      return { count: MEDIUMCOUNT, more: SMALLMORE };
     } else {
-      return { count: 5, more: 2 };
+      return { count: SMALLCOUNT, more: SMALLMORE };
     }
   }
 
@@ -43,15 +50,15 @@ function MoviesCardList(props) {
   const [countPerRow, setCountPerRow] = useState(reportInitialWindowSize().more);
 
   const reportWindowSize = () => {
-    if (window.innerWidth > 1087) {
-      setLastIndex(12);
-      setCountPerRow(3);
-    } else if (window.innerWidth > 689) {
-      setLastIndex(8);
-      setCountPerRow(2);
+    if (window.innerWidth > BIGWINSIZE) {
+      setLastIndex(BIGCOUNT);
+      setCountPerRow(BIGMORE);
+    } else if (window.innerWidth > MEDIUMWINSIZE) {
+      setLastIndex(MEDIUMCOUNT);
+      setCountPerRow(SMALLMORE);
     } else {
-      setLastIndex(5);
-      setCountPerRow(2);
+      setLastIndex(SMALLCOUNT);
+      setCountPerRow(SMALLMORE);
     }
   }
 
@@ -91,13 +98,12 @@ function MoviesCardList(props) {
               card={card}
               savedCards={props.cards}
               setSavedCards={props.setSavedCards}
-              setShortSavedCards={props.setShortSavedCards}
             />
           ))}
         </ul>
       )}
 
-      { props.isSearched && <p className="moviesCardList__nothing" hidden={films.length > 0}>«Ничего не найдено»</p> }
+      {props.isSearched && <p className="moviesCardList__nothing" hidden={films.length > 0}>«Ничего не найдено»</p>}
 
       <div className="moviesCardList__wrapper">
         <button className="moviesCardList__more" type="button" onClick={ShowMore}

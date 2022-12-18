@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -17,8 +17,7 @@ import approve from '../../images/approve.png';
 import denied from '../../images/denied.png';
 
 function App() {
-
-  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('loggedIn'));
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('loggedIn')));
   const [currentUser, setCurrentUser] = useState({});
   const history = useHistory();
   const [isOpenSuccessPopup, setIsOpenSuccessPopup] = useState(false);
@@ -38,10 +37,11 @@ function App() {
     localStorage.removeItem('processedCards');
     localStorage.removeItem('savedCards');
     setLoggedIn(false);
+    localStorage.setItem('loggedIn', false)
     setSearchQuery("");
     setProcessedCards([]);
     setIsShorts(false);
-    history.push('/signin');
+    history.push('/');
   }
 
   const [originalCards, setOriginalCards] = useState([]);
@@ -71,12 +71,6 @@ function App() {
     localStorage.setItem('isShorts', e.target.checked);
   }
 
-  const [isSavedShorts, setIsSavedShorts] = useState(false);
-
-  const handleIsSavedShorts = (e) => {
-    setIsSavedShorts(e.target.checked)
-  }
-
   const [processedCards, setProcessedCards] = useState(
     JSON.parse(localStorage.getItem('processedCards')) || []);
   localStorage.setItem('processedCards', JSON.stringify(processedCards));
@@ -96,10 +90,18 @@ function App() {
     localStorage.setItem('savedCards', JSON.stringify([...savedCards, item]));
   }
 
+  const [isSavedSearched, setIsSavedSearched] = useState(false);
+
   const [savedSearchQuery, setSavedSearchQuery] = useState("");
 
   const handleSavedSearchQuery = (value) => {
     setSavedSearchQuery(value);
+  }
+
+  const [isSavedShorts, setIsSavedShorts] = useState(false);
+
+  const handleIsSavedShorts = (e) => {
+    setIsSavedShorts(e.target.checked)
   }
 
   const findMyCards = () => {
@@ -130,33 +132,7 @@ function App() {
       const jwt = localStorage.getItem('jwt');
       if (jwt) {
         auth.getContent(jwt).then((res) => {
-          if (res) {
-            setCurrentUser({
-              name: res.data.name,
-              email: res.data.email,
-              id: res.data._id
-            })
-            setLoggedIn(true);
-            findMyCards();
-          }
-        })
-          .catch((err) => {
-            console.log(err);
-          })
-      } else {
-        signOut();
-        console.log("Нет токена в локальном хранилище");
-      }
-    }
-    tokenCheck();
-  }, [loggedIn]);
-
-  const handleLoginSubmit = ({ email, password }) => {
-    auth.authorize({ email, password }).then((res) => {
-      if (res.token) {
-        const jwt = localStorage.getItem('jwt');
-        auth.getContent(jwt).then((res) => {
-          if (res) {
+          if (res.data) {
             setCurrentUser({
               name: res.data.name,
               email: res.data.email,
@@ -164,17 +140,52 @@ function App() {
             })
             setLoggedIn(true);
             localStorage.setItem('loggedIn', loggedIn);
-            history.push('/movies');
-          } else {
-            console.log("Некорректно заполнено одно из полей");
-            setIsServerError(res.message);
+            findMyCards();
           }
         })
           .catch((err) => {
+            setLoggedIn(false);
+            localStorage.setItem('loggedIn', false);
+            signOut();
             console.log(err);
           })
+      } else {
+        console.log("Нет токена в локальном хранилище");
+        setLoggedIn(false);
+        localStorage.setItem('loggedIn', false);
       }
-    })
+    }
+    tokenCheck();
+  }, [loggedIn]);
+
+  const handleLoginSubmit = ({ email, password }) => {
+    auth.authorize({ email, password })
+      .then((res) => {
+        if (res.token) {
+          const jwt = localStorage.getItem('jwt');
+          auth.getContent(jwt)
+            .then((res) => {
+              if (res) {
+                setCurrentUser({
+                  name: res.data.name,
+                  email: res.data.email,
+                  id: res.data._id
+                })
+                setLoggedIn(true);
+                localStorage.setItem('loggedIn', loggedIn);
+                history.push('/movies');
+              } else {
+                console.log("Некорректно заполнено одно из полей");
+                setIsServerError(res.message);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+        } else {
+          setIsServerError(res.message);
+        }
+      })
       .catch((err) => {
         console.log(err);
       })
@@ -190,6 +201,7 @@ function App() {
             </Route>
             <ProtectedRoute path="/movies"
               component={Movies}
+              originalCards={originalCards}
               handleOriginalCards={handleOriginalCards}
               handleSearchQuery={handleSearchQuery}
               handleProcessedCards={handleProcessedCards}
@@ -213,7 +225,9 @@ function App() {
               handleIsSavedShorts={handleIsSavedShorts}
               handleSavedSearchQuery={handleSavedSearchQuery}
               savedSearchQuery={savedSearchQuery}
-              isSearched={isSearched}
+              setSavedSearchQuery={setSavedSearchQuery}
+              isSavedSearched={isSavedSearched}
+              setIsSavedSearched={setIsSavedSearched}
             />
             <ProtectedRoute path="/profile"
               component={Profile}
@@ -223,10 +237,18 @@ function App() {
               handleOpenDeniedPopup={openDeniedPopup}
             />
             <Route path="/signin">
-              <Login handleLoginSubmit={handleLoginSubmit} isServerError={isServerError} />
+              {
+                loggedIn ?
+                  <Redirect to="/" /> :
+                  <Login handleLoginSubmit={handleLoginSubmit} isServerError={isServerError} />
+              }
             </Route>
             <Route path="/signup">
-              <Register handleLoginSubmit={handleLoginSubmit} />
+              {
+                loggedIn ?
+                  <Redirect to="/" /> :
+                  <Register handleLoginSubmit={handleLoginSubmit} />
+              }
             </Route>
             <Route path="*">
               <PageNotFound loggedIn={loggedIn} />

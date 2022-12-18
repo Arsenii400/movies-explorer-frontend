@@ -21,7 +21,7 @@ export const authorize = ({ email, password }) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then((res => res.json()))
+    .then(res => res.json())
     .then((res) => {
       if (res.token) {
         localStorage.setItem('jwt', res.token);
@@ -41,9 +41,5 @@ export const getContent = (token) => {
       "Authorization": `Bearer ${token}`,
     }
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    })
+  .then(res => res.json())
 };

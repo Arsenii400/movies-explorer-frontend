@@ -9,17 +9,20 @@ function Portfolio() {
       <h2 className="portfolio__title">Портфолио</h2>
       <ul className="portfolio__list">
         <li className="portfolio__item">
-          <a className="portfolio__link" href={HOW_TO_LEARN_URL}>Статичный сайт
+          <a className="portfolio__link" href={HOW_TO_LEARN_URL}
+          target="_blank" rel="noopener noreferrer">Статичный сайт
             <img className="portfolio__arrow" src={arrow} alt="arrow" />
           </a>
         </li>
         <li className="portfolio__item">
-          <a className="portfolio__link" href={RUSSIAN_TRAVEL_URL}>Адаптивный сайт
+          <a className="portfolio__link" href={RUSSIAN_TRAVEL_URL}
+          target="_blank" rel="noopener noreferrer">Адаптивный сайт
             <img className="portfolio__arrow" src={arrow} alt="arrow" />
           </a>
         </li>
         <li className="portfolio__item">
-          <a className="portfolio__link" href={MESTO_URL}>Одностраничное приложение
+          <a className="portfolio__link" href={MESTO_URL}
+          target="_blank" rel="noopener noreferrer">Одностраничное приложение
             <img className="portfolio__arrow" src={arrow} alt="arrow" />
           </a>
         </li>

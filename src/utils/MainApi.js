@@ -1,7 +1,7 @@
 import { BASE_URL } from './constants';
 
 const checkAnswer = (res) => {
-  if (res.ok) {
+  if (res) {
     return res.json();
   }
   return Promise.reject(`Что-то пошло не так: ${res.status}`);
