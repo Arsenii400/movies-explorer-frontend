@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { DURATION, BIGWINSIZE, MEDIUMWINSIZE,
-BIGCOUNT, MEDIUMCOUNT, SMALLCOUNT, BIGMORE, SMALLMORE } from "../../utils/constants";
+import { DURATION, BIGWINSIZE, MEDIUMWINSIZE, BIGCOUNT, MEDIUMCOUNT, SMALLCOUNT, BIGMORE, SMALLMORE } from "../../utils/constants";
 
 function MoviesCardList(props) {
   const { pathname } = useLocation();
