@@ -228,6 +228,9 @@
   padding: 8px 7.25px;
 }
 
+.nav__navLink_green {
+  color: white;
+}
 
 @media screen and (max-width: 861px) {
   .header {
@@ -262,6 +265,7 @@
 
   .burger__checkbox:checked+.burger__label::after {
     content: "×";
+    color: black;
   }
 }
 

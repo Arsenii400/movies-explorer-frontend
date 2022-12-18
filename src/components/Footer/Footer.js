@@ -1,5 +1,7 @@
 import React from "react";
 import './Footer.css';
+import { YA_PRAKTIKUM_URL, GITHUB_URL } from '../../utils/constants';
+
 
 function Footer() {
   return (
@@ -8,8 +10,8 @@ function Footer() {
       <div className="footer__wrapper">
         <p className="footer__year">&copy; 2022</p>
         <div className="footer__links">
-          <a className="footer__link" href="https://practicum.yandex.ru/web/">Яндекс.Практикум</a>
-          <a className="footer__link" href="https://github.com/">Github</a>
+          <a className="footer__link" href={YA_PRAKTIKUM_URL} target="_blank" rel="noopener noreferrer">Яндекс.Практикум</a>
+          <a className="footer__link" href={GITHUB_URL} target="_blank" rel="noopener noreferrer">Github</a>
         </div>
       </div>
     </footer>
